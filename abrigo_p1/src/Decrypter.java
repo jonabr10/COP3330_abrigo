@@ -11,7 +11,7 @@ public class Decrypter {
             if (numValOfsecretMsg[i] >= 7) {
                 numValOfsecretMsg[i] = (numValOfsecretMsg[i] - 7) % 10;
             } else {
-                numValOfsecretMsg[i] = (numValOfsecretMsg[i] + 10) % 7;
+                numValOfsecretMsg[i] = (numValOfsecretMsg[i] + 10) - 7;
             }
         }
 
