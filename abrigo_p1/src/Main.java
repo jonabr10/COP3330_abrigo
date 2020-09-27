@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Encrypter e = new Encrypter();
-        System.out.println(e.encrypt("0123"));
+        System.out.println(e.encrypt("1234"));
 
         Encrypter e1 = new Encrypter();
         System.out.println(e1.encrypt("0199"));
@@ -10,7 +10,7 @@ public class Main {
         System.out.println(e2.encrypt("0099"));
 
         Decrypter f = new Decrypter();
-        System.out.println(f.decrypt("9078"));
+        System.out.println(f.decrypt("0189"));
 
         Decrypter f1 = new Decrypter();
         System.out.println(f1.decrypt("6678"));
