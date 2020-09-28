@@ -58,7 +58,7 @@ public class App {
 
     // Criteria 7: 2pts
     public static void displayBmiInfo(BodyMassIndex bmi) {
-        System.out.println("BMI score: " + bmi.getformattedBMI() + " " + bmi.calculateCategory());
+        System.out.println("BMI score: " + bmi.getBMIData() + "\n");
     }
 
     // Criteria 8: 2pts

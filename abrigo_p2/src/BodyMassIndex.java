@@ -7,6 +7,10 @@ public class BodyMassIndex {
         this.bmi = calculateBMI(height, weight);
     }
 
+    public BodyMassIndex() {
+        this.bmi = 0.00;
+    }
+
     // Criteria 9: 2pts
     public double calculateBMI(double height, double weight) {
         return 703 * weight / Math.pow(height, 2);
@@ -29,10 +33,10 @@ public class BodyMassIndex {
         return bmi;
     }
 
-    public String getformattedBMI() {
+    public String getBMIData() {
         String pattern = "#.##";
         DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
-        return decimalFormat.format(bmi);
+        return decimalFormat.format(bmi) + " " + calculateCategory();
     }
 }
