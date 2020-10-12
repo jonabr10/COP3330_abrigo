@@ -1,3 +1,4 @@
+// Criteria 2: 1pt
 abstract class Shape {
     // Criteria 3: 1pt
     public abstract String getName();

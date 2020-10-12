@@ -11,7 +11,7 @@ public class Square extends Shape2D {
         return name;
     }
 
-    // ShapeTest cases 2, 3: 1pt
+    // ShapeTest cases 2, 3: 2pts
     public double getArea() {
         return Math.pow(side, 2);
     }

@@ -1,3 +1,4 @@
+// Criteria 6: 1pt
 abstract class Shape3D extends Shape2D{
     // Criteria 3: 1pt
     public abstract String getName();

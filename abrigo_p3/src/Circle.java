@@ -11,7 +11,7 @@ public class Circle extends Shape2D {
         return name;
     }
 
-    // ShapeTest cases 8, 9: 1pt
+    // ShapeTest cases 8, 9: 2pts
     public double getArea() {
         return Math.PI * Math.pow(radius, 2);
     }

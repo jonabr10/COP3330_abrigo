@@ -13,7 +13,7 @@ public class Triangle extends Shape2D {
         return name;
     }
 
-    // ShapeTest cases 5, 6: 1pt
+    // ShapeTest cases 5, 6: 2pts
     public double getArea() {
         return (0.5 * base * height);
     }
