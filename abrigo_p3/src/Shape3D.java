@@ -1,4 +1,4 @@
-abstract class Shape extends Shape2D {
+abstract class Shape3D {
     // Criteria 3: 1pt
     public abstract String getName();
 
