@@ -50,7 +50,7 @@ public class BodyMassIndexTest {
     @Test
     public void testGetBMI() {
         BodyMassIndex test = new BodyMassIndex(24, 100);
-        assertEquals(122.04861111111111, test.getBMI());
+        assertEquals(122.049, test.getBMI(), 0.001);
     }
 
 }
