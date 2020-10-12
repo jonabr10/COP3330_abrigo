@@ -1,4 +1,4 @@
-public class Square extends Shape {
+public class Square extends Shape2D {
     private String name = "square";
     private double side;
 

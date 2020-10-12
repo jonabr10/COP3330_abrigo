@@ -1,4 +1,4 @@
-public class Triangle extends Shape {
+public class Triangle extends Shape2D {
     private String name = "triangle";
     private double base;
     private double height;
