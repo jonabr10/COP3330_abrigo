@@ -9,3 +9,4 @@ abstract class Shape3D extends Shape2D{
     // Criteria 7: 1pt
     public abstract double getVolume();
 }
+
