@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
@@ -217,6 +219,48 @@ class TaskListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> newList.getItemDate(2));
     }
 
+    @Test
+    public void writingTaskListToTextFile() {
+        TaskList newList = new TaskList();
+        TaskItem newItem1 = new TaskItem("Title1", "Description2", "01/10/2020");
+        TaskItem newItem2 = new TaskItem("Title2", "Description2", "02/20/2020");
+        TaskItem newItem3 = new TaskItem(true, "Title3", "Description3", "03/30/2020");
 
+        newList.addTask(newItem1);
+        newList.addTask(newItem2);
+        newList.addTask(newItem3);
 
+        assertDoesNotThrow(() -> newList.write("writingTaskListToTextFile.txt"));
+    }
+
+    @Test
+    public void savedTaskListCanBeLoaded() {
+        TaskList newList = new TaskList();
+        TaskItem newItem1 = new TaskItem("Title1", "Description2", "01/10/2020");
+        TaskItem newItem2 = new TaskItem("Title2", "Description2", "02/20/2020");
+        TaskItem newItem3 = new TaskItem(true, "Title3", "Description3", "03/30/2020");
+
+        newList.addTask(newItem1);
+        newList.addTask(newItem2);
+        newList.addTask(newItem3);
+        newList.write("writingTaskListToTextFile.txt");
+
+        assertDoesNotThrow(() -> newList.load("writingTaskListToTextFile.txt"));
+    }
+
+    @Test
+    public void savedTaskListCannotBeLoadedDueToIncorrectFileName() {
+        TaskList newList = new TaskList();
+        TaskItem newItem1 = new TaskItem("Title1", "Description2", "01/10/2020");
+        TaskItem newItem2 = new TaskItem("Title2", "Description2", "02/20/2020");
+        TaskItem newItem3 = new TaskItem(true, "Title3", "Description3", "03/30/2020");
+
+        newList.addTask(newItem1);
+        newList.addTask(newItem2);
+        newList.addTask(newItem3);
+        newList.write("writingTaskListToTextFile.txt");
+
+        assertThrows(FileNotFoundException.class, () -> newList.load("someRandomFileName.txt"));
+        newList.write("writingTaskListToTextFileFromLoadMethod.txt");
+    }
 }

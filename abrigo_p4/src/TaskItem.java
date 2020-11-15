@@ -8,7 +8,7 @@ public class TaskItem {
     String description;
     String date;
 
-    public TaskItem (String title, String desc, String date) throws InvalidDateException {
+    public TaskItem (String title, String desc, String date) {
         this.completionStatus = false;
 
         if (isTitleValid(title)) {
@@ -30,7 +30,7 @@ public class TaskItem {
         }
     }
 
-    public TaskItem (boolean completionStatus, String title, String desc, String date) throws InvalidDateException {
+    public TaskItem (boolean completionStatus, String title, String desc, String date) {
         this.completionStatus = completionStatus;
 
         if (isTitleValid(title)) {
@@ -118,6 +118,15 @@ public class TaskItem {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (this.completionStatus == true) {
+            return String.format("[STATUS: DONE] [%s] %s: %s", this.date, this.title, this.description);
+        } else {
+            return String.format("[STATUS: NOT DONE] [%s] %s: %s", this.date, this.title, this.description);
         }
     }
 }

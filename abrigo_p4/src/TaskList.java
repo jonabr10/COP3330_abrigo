@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class TaskList {
     ArrayList<TaskItem> tasks;
@@ -151,9 +152,44 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
     }
-
     public boolean isItemValid(int index) {
         return index <= tasks.size();
     }
 
+    public void write(String fileName) {
+        try (Formatter output = new Formatter(fileName)) {
+            for (int i = 0; i < tasks.size(); i++) {
+                TaskItem temp = tasks.get(i);
+                output.format("%b %s %s %s%n", temp.getCompletionStatus(), temp.getTitle(), temp.getDescription(), temp.getDate());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: unable to find the file.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load(String fileName) throws FileNotFoundException {
+        try {
+            File fileText = new File(fileName);
+            Scanner input = new Scanner(fileText);
+            tasks.clear();
+
+            while (input.hasNext()) {
+                boolean status = input.nextBoolean();
+                String title = input.next();
+                String desc = input.next();
+                String date = input.next();
+
+                TaskItem temp = new TaskItem(status, title, desc, date);
+                tasks.add(temp);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: unable to find the file.");
+            throw new FileNotFoundException();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
