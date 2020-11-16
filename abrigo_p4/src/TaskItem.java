@@ -116,6 +116,7 @@ public class TaskItem {
             //               thrown and false will be returned.
 
             return true;
+
         } catch (Exception e) {
             return false;
         }

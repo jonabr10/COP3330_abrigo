@@ -15,6 +15,7 @@ public class TaskList {
     public void removeTask(int index) {
         try {
             tasks.remove(index);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -37,6 +38,7 @@ public class TaskList {
             temp.setDate(newDate);
 
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -49,6 +51,7 @@ public class TaskList {
             TaskItem temp = tasks.get(index);
             temp.setCompletionStatusToDone();
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -61,6 +64,7 @@ public class TaskList {
             TaskItem temp = tasks.get(index);
             temp.setCompletionStatusToNotDone();
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -73,6 +77,7 @@ public class TaskList {
             TaskItem temp = tasks.get(index);
             temp.setTitle(newTitle);
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -85,6 +90,7 @@ public class TaskList {
             TaskItem temp = tasks.get(index);
             temp.setDescription(newDesc);
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -97,6 +103,7 @@ public class TaskList {
             TaskItem temp = tasks.get(index);
             temp.setDate(newDate);
             tasks.set(index, temp);
+
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error: task list at index " + index + " does not exist.");
             throw new IndexOutOfBoundsException();
@@ -152,16 +159,16 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
     }
-    public boolean isItemValid(int index) {
+    private boolean isItemValid(int index) {
         return index <= tasks.size();
     }
 
     public void write(String fileName) {
         try (Formatter output = new Formatter(fileName)) {
-            for (int i = 0; i < tasks.size(); i++) {
-                TaskItem temp = tasks.get(i);
+            for (TaskItem temp : tasks) {
                 output.format("%b %s %s %s%n", temp.getCompletionStatus(), temp.getTitle(), temp.getDescription(), temp.getDate());
             }
+
         } catch (FileNotFoundException e) {
             System.out.println("Error: unable to find the file.");
         } catch (Exception e) {
