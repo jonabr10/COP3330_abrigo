@@ -166,7 +166,7 @@ public class TaskList {
     public void write(String fileName) {
         try (Formatter output = new Formatter(fileName)) {
             for (TaskItem temp : tasks) {
-                output.format("%b %s %s %s%n", temp.getCompletionStatus(), temp.getTitle(), temp.getDescription(), temp.getDate());
+                output.format("%b%n%s%n%s%n%s%n", temp.getCompletionStatus(), temp.getTitle(), temp.getDescription(), temp.getDate());
             }
 
         } catch (FileNotFoundException e) {
@@ -184,9 +184,10 @@ public class TaskList {
 
             while (input.hasNext()) {
                 boolean status = input.nextBoolean();
-                String title = input.next();
-                String desc = input.next();
-                String date = input.next();
+                input.nextLine();
+                String title = input.nextLine();
+                String desc = input.nextLine();
+                String date = input.nextLine();
 
                 TaskItem temp = new TaskItem(status, title, desc, date);
                 tasks.add(temp);

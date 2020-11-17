@@ -124,7 +124,7 @@ public class TaskItem {
 
     @Override
     public String toString() {
-        if (this.completionStatus == true) {
+        if (this.completionStatus) {
             return String.format("[STATUS: DONE] [%s] %s: %s", this.date, this.title, this.description);
         } else {
             return String.format("[STATUS: NOT DONE] [%s] %s: %s", this.date, this.title, this.description);
