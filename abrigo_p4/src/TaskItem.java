@@ -58,6 +58,16 @@ public class TaskItem {
     public void setCompletionStatusToNotDone() {
         this.completionStatus = false;
     }
+    public void setItem(String newTitle, String newDesc, String newDate) {
+        if (isTitleValid(newTitle) && isDescriptionValid(newDesc) && isDateValid(newDate)) {
+            this.title = newTitle;
+            this.description = newDesc;
+            this.date = newDate;
+        }
+        else {
+            throw new IllegalArgumentException("New Data inputted was invalid, please try again.");
+        }
+    }
     public void setTitle(String newTitle) {
         if (isTitleValid(newTitle)) {
             this.title = newTitle;

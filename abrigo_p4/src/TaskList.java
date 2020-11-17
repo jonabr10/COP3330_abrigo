@@ -27,16 +27,7 @@ public class TaskList {
     public void editTask(int index, String newTitle, String newDesc, String newDate) {
         try {
             TaskItem temp = tasks.get(index);
-
-            //System.out.print("Enter a new title for task " + index + ": ");
-            temp.setTitle(newTitle);
-
-            //System.out.println("Enter a new description for task " + index + ": ");
-            temp.setDescription(newDesc);
-
-            //System.out.println("Enter a new task due date (MM/DD/YYYY) for task " + index + ": ");
-            temp.setDate(newDate);
-
+            temp.setItem(newTitle, newDesc, newDate);
             tasks.set(index, temp);
 
         } catch (IndexOutOfBoundsException e) {
