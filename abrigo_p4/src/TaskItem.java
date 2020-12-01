@@ -59,13 +59,18 @@ public class TaskItem {
         this.completionStatus = false;
     }
     public void setItem(String newTitle, String newDesc, String newDate) {
-        if (isTitleValid(newTitle) && isDescriptionValid(newDesc) && isDateValid(newDate)) {
-            this.title = newTitle;
-            this.description = newDesc;
-            this.date = newDate;
-        }
-        else {
-            throw new IllegalArgumentException("New Data inputted was invalid, please try again.");
+        try  {
+            setTitle(newTitle);
+            setDescription(newDesc);
+            setDate(newDate);
+        } catch (InvalidTitleException e) {
+            throw new InvalidTitleException("Title is invalid, string length must be at least  1 character long");
+        } catch (InvalidDescriptionException e) {
+            throw new InvalidDescriptionException("Description is invalid, string length must be at least 1 character long");
+        } catch (InvalidDateException e) {
+            throw new InvalidDateException("Date is invalid, date format must be MM/DD/YYYY");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public void setTitle(String newTitle) {
