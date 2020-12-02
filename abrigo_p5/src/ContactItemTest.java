@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ContactItemTest {
@@ -142,5 +141,11 @@ class ContactItemTest {
         assertEquals("newEmail", test.getEmailAddress());
     }
 
+    @Test
+    public void testToString() {
+        ContactItem test = new ContactItem("FirstName", "LastName", "123-456-7890", "Email@email.com");
+        String result = "Name: FirstName LastName\nPhone: 123-456-7890\nEmail: Email@email.com";
 
+        assertEquals(result, test.toString());
+    }
 }
