@@ -143,7 +143,7 @@ public class ContactApp {
 
     private void removeItem() {
         viewList();
-        System.out.println("\nDeleting a task...");
+        System.out.println("\nDeleting a contact...");
 
         try {
             int index = getIndex();
@@ -167,7 +167,7 @@ public class ContactApp {
     }
 
     public int getIndex() {
-        System.out.print("\nPlease input which task you would like to select: ");
+        System.out.print("\nPlease input which contact you would like to select: ");
         return input.nextInt();
     }
     public String getFirstName() {
