@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class TaskApp {
+public class ContactApp {
     private static Scanner input = new Scanner(System.in);
-    private TaskList taskLists;
+    private ContactList contactLists;
 
     public void mainMenuChoice() {
         int choice = mainMenu();
@@ -11,19 +11,19 @@ public class TaskApp {
         while (choice != 3) {
 
             if (choice == 1) {
-                taskLists = new TaskList();
-                System.out.println("new task list has been created");
-                tasksMenuChoice();
+                contactLists = new ContactList();
+                System.out.println("new contact list has been created");
+                contactsMenuChoice();
             }
 
             else if (choice == 2) {
-                taskLists = new TaskList();
+                contactLists = new ContactList();
                 input.nextLine();
                 String fileName = getFileNameForLoading();
                 try {
-                    taskLists.load(fileName);
-                    System.out.println("task list has been loaded");
-                    tasksMenuChoice();
+                    contactLists.load(fileName);
+                    System.out.println("contact list has been loaded");
+                    contactsMenuChoice();
                 } catch (FileNotFoundException e) {
                     System.out.println("File Name Inputted: " + fileName);
                 } catch (Exception e) {
@@ -54,10 +54,10 @@ public class TaskApp {
         }
     }
 
-    private void tasksMenuChoice() {
+    private void contactsMenuChoice() {
         int choice = listOpMenu();
 
-        while (choice != 8) {
+        while (choice != 6) {
             if (choice == 1) {
                 viewList();
             } else if (choice == 2) {
@@ -67,10 +67,6 @@ public class TaskApp {
             } else if (choice == 4) {
                 removeItem();
             } else if (choice == 5) {
-                markItemAsComplete();
-            } else if (choice == 6) {
-                markItemAsNotComplete();
-            } else if (choice == 7) {
                 saveList();
             }
 
@@ -84,10 +80,8 @@ public class TaskApp {
         System.out.println("2) add an item");
         System.out.println("3) edit an item");
         System.out.println("4) remove an item");
-        System.out.println("5) mark an item as completed");
-        System.out.println("6) un-mark an item as completed");
-        System.out.println("7) save the current list");
-        System.out.println("8) quit to the main menu");
+        System.out.println("5) save the current list");
+        System.out.println("6) quit to the main menu");
 
         return isListOpMenuValid();
     }
@@ -96,8 +90,7 @@ public class TaskApp {
         int ans = input.nextInt();
 
         if (ans == 1 || ans == 2 || ans == 3
-                || ans == 4 || ans == 5|| ans == 6
-                || ans == 7 || ans == 8) {
+                || ans == 4 || ans == 5|| ans == 6) {
             return ans;
         } else {
             System.out.println("Please choose a valid choice.");
@@ -106,28 +99,25 @@ public class TaskApp {
     }
 
     private void viewList() {
-        System.out.println("\nCurrent Tasks");
+        System.out.println("\nCurrent Contacts");
         System.out.println("-------------");
-        for (int i = 0; i < taskLists.getSize(); i++) {
-            System.out.println(i + ") " + taskLists.getItem(i));
+        for (int i = 0; i < contactLists.getSize(); i++) {
+            System.out.println(i + ") " + contactLists.getItem(i));
         }
     }
     private void addItem() {
         input.nextLine();
-        String title = getTitle();
-        String description = getDescription();
-        String date = getDate();
+        String first = getFirstName();
+        String last = getLastName();
+        String phoneNum = getPhoneNumber();
+        String email = getEmail();
 
         try {
-            TaskItem data = new TaskItem(title, description, date);
-            taskLists.addTask(data);
+            ContactItem data = new ContactItem(first, last, phoneNum, email);
+            contactLists.addContact(data);
 
-        } catch (InvalidTitleException e ) {
-            System.out.println("Warning: Title was invalid");
-        } catch (InvalidDescriptionException e) {
-            System.out.println("Warning: Description was invalid");
-        } catch (InvalidDateException e) {
-            System.out.println("Warning: Date was invalid");
+        } catch (InvalidContactItemException e ) {
+            System.out.println("Warning: Please double check the information you are inputting.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,11 +127,12 @@ public class TaskApp {
         try {
             int index = getIndex();
             input.nextLine();
-            String title = getTitle();
-            String description = getDescription();
-            String date = getDate();
+            String first = getFirstName();
+            String last = getLastName();
+            String phoneNum = getPhoneNumber();
+            String email = getEmail();
 
-            taskLists.editTask(index, title, description, date);
+            contactLists.editContact(index, first, last, phoneNum, email);
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Warning: index was invalid");
@@ -149,52 +140,26 @@ public class TaskApp {
             e.printStackTrace();
         }
     }
+
     private void removeItem() {
         viewList();
         System.out.println("\nDeleting a task...");
 
         try {
             int index = getIndex();
-            taskLists.removeTask(index);
+            contactLists.removeContact(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Warning: index was invalid");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void markItemAsComplete() {
-        viewList();
-        System.out.println("\nMarking an item as complete...");
 
-        try {
-            int index = getIndex();
-            taskLists.editTaskCompletionStatusToDone(index);
-
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Warning: index was invalid");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void markItemAsNotComplete() {
-        viewList();
-        System.out.println("\nMarking an item as not complete...");
-
-        try {
-            int index = getIndex();
-            taskLists.editTaskCompletionStatusToNotDone(index);
-
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Warning: index was invalid");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     private void saveList() {
         input.nextLine();
         String fileName = getFileNameForSaving();
         try {
-            taskLists.write(fileName);
+            contactLists.write(fileName);
             System.out.println("task list has been saved");
         } catch (Exception e) {
             e.printStackTrace();
@@ -205,16 +170,20 @@ public class TaskApp {
         System.out.print("\nPlease input which task you would like to select: ");
         return input.nextInt();
     }
-    public String getTitle() {
-        System.out.print("Task Title: ");
+    public String getFirstName() {
+        System.out.print("Contact's First Name: ");
         return input.nextLine();
     }
-    public String getDescription() {
-        System.out.print("Task description: ");
+    public String getLastName() {
+        System.out.print("Contact's Last Name: ");
         return input.nextLine();
     }
-    public String getDate() {
-        System.out.print("Task due date (MM/DD/YYYY): ");
+    public String getPhoneNumber() {
+        System.out.print("Phone number (xxx-xxx-xxxx): ");
+        return input.nextLine();
+    }
+    public String getEmail() {
+        System.out.print("Email address (x@y.z): ");
         return input.nextLine();
     }
     private String getFileNameForLoading() {

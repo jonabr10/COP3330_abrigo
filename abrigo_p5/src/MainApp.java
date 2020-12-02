@@ -16,7 +16,8 @@ public class MainApp {
             }
 
             else if (choice == 2) {
-                System.out.println("TO DO");
+                ContactApp contactLists = new ContactApp();
+                contactLists.mainMenuChoice();
             }
 
             choice = mainAppMenu();
